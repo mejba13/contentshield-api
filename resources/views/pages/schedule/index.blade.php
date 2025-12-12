@@ -5,19 +5,6 @@
 
 @section('styles')
 <style>
-    .page-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 32px;
-    }
-
-    .page-description {
-        color: var(--text-secondary);
-        font-size: 0.9375rem;
-        margin-top: 4px;
-    }
-
     .schedule-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);

@@ -5,124 +5,151 @@
 
 @section('styles')
 <style>
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 24px;
-        margin-bottom: 32px;
+    /* Stats Grid - 4 Column Horizontal Layout */
+    .stats-row {
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        gap: 16px !important;
+        margin-bottom: 24px !important;
+        width: 100% !important;
     }
 
-    .stat-card {
+    .stat-box {
         background: var(--bg-card);
         border: 1px solid var(--border-subtle);
         border-radius: var(--radius-lg);
-        padding: 24px;
+        padding: 20px;
         position: relative;
         overflow: hidden;
-        transition: all var(--transition-base);
-        animation: slideUp 0.5s ease-out both;
+        transition: all 0.2s ease;
     }
 
-    .stat-card:nth-child(1) { animation-delay: 0.1s; }
-    .stat-card:nth-child(2) { animation-delay: 0.15s; }
-    .stat-card:nth-child(3) { animation-delay: 0.2s; }
-    .stat-card:nth-child(4) { animation-delay: 0.25s; }
-
-    .stat-card:hover {
+    .stat-box:hover {
         border-color: var(--border-hover);
         transform: translateY(-2px);
-        box-shadow: var(--shadow-card);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     }
 
-    .stat-card::before {
+    .stat-box::before {
         content: '';
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
-        height: 1px;
-        background: linear-gradient(90deg, transparent, var(--stat-accent, var(--accent-cyan)), transparent);
-        opacity: 0;
-        transition: opacity var(--transition-base);
+        height: 3px;
+        background: var(--box-accent, #00E5FF);
     }
 
-    .stat-card:hover::before { opacity: 1; }
+    .stat-box.cyan { --box-accent: #00E5FF; }
+    .stat-box.emerald { --box-accent: #00E676; }
+    .stat-box.rose { --box-accent: #FF5252; }
+    .stat-box.amber { --box-accent: #FFB300; }
 
-    .stat-card.cyan { --stat-accent: var(--accent-cyan); }
-    .stat-card.emerald { --stat-accent: var(--accent-emerald); }
-    .stat-card.amber { --stat-accent: var(--accent-amber); }
-    .stat-card.rose { --stat-accent: var(--accent-rose); }
-
-    .stat-header {
+    .stat-box-header {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-between;
         margin-bottom: 16px;
     }
 
-    .stat-icon {
-        width: 44px;
-        height: 44px;
-        border-radius: var(--radius-md);
+    .stat-box-icon {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
         display: flex;
         align-items: center;
         justify-content: center;
-        background: var(--stat-accent, var(--accent-cyan));
-        opacity: 0.15;
     }
 
-    .stat-icon svg {
-        width: 22px;
-        height: 22px;
-        color: var(--stat-accent, var(--accent-cyan));
-        opacity: 1;
-        position: relative;
+    .stat-box.cyan .stat-box-icon {
+        background: rgba(0, 229, 255, 0.12);
+        color: #00E5FF;
+    }
+    .stat-box.emerald .stat-box-icon {
+        background: rgba(0, 230, 118, 0.12);
+        color: #00E676;
+    }
+    .stat-box.rose .stat-box-icon {
+        background: rgba(255, 82, 82, 0.12);
+        color: #FF5252;
+    }
+    .stat-box.amber .stat-box-icon {
+        background: rgba(255, 179, 0, 0.12);
+        color: #FFB300;
     }
 
-    .stat-change {
-        display: flex;
+    .stat-box-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .stat-box-change {
+        display: inline-flex;
         align-items: center;
-        gap: 4px;
-        font-size: 0.8125rem;
-        font-weight: 600;
-        padding: 4px 10px;
+        gap: 3px;
+        font-size: 0.6875rem;
+        font-weight: 700;
+        padding: 4px 8px;
         border-radius: 100px;
-    }
-
-    .stat-change.up {
-        color: var(--accent-emerald);
-        background: rgba(16, 185, 129, 0.1);
-    }
-
-    .stat-change.down {
-        color: var(--accent-rose);
-        background: rgba(244, 63, 94, 0.1);
-    }
-
-    .stat-value {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 2.5rem;
-        font-weight: 500;
-        letter-spacing: -0.02em;
-        line-height: 1;
-        margin-bottom: 8px;
     }
 
-    .stat-label {
-        font-size: 0.875rem;
-        color: var(--text-secondary);
+    .stat-box-change.up {
+        color: #00E676;
+        background: rgba(0, 230, 118, 0.12);
+    }
+
+    .stat-box-change.down {
+        color: #FF5252;
+        background: rgba(255, 82, 82, 0.12);
+    }
+
+    .stat-box-change svg {
+        width: 12px;
+        height: 12px;
+    }
+
+    .stat-box-value {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1;
+        margin-bottom: 6px;
+        color: #FFFFFF;
+    }
+
+    .stat-box-label {
+        font-size: 0.75rem;
+        color: #718096;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+    }
+
+    /* Responsive */
+    @media (max-width: 1100px) {
+        .stats-row {
+            grid-template-columns: repeat(2, 1fr) !important;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .stats-row {
+            grid-template-columns: 1fr !important;
+        }
     }
 
     .main-grid {
         display: grid;
-        grid-template-columns: 1fr 400px;
-        gap: 24px;
+        grid-template-columns: 1fr 380px;
+        gap: 20px;
     }
 
-    .chart-card { animation-delay: 0.3s; }
+    .chart-card { animation-delay: 0.25s; }
 
     .chart-container {
-        height: 300px;
+        height: 280px;
         position: relative;
     }
 
@@ -138,7 +165,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        padding: 20px 0;
+        padding: 16px 0;
     }
 
     .chart-line {
@@ -150,23 +177,23 @@
     .chart-line::before {
         content: attr(data-value);
         position: absolute;
-        left: -40px;
+        left: -36px;
         top: 50%;
         transform: translateY(-50%);
         font-family: 'JetBrains Mono', monospace;
-        font-size: 0.6875rem;
-        color: var(--text-muted);
+        font-size: 0.625rem;
+        color: var(--text-dim);
     }
 
     .chart-bars {
         position: absolute;
-        bottom: 40px;
-        left: 40px;
-        right: 20px;
-        height: 220px;
+        bottom: 36px;
+        left: 36px;
+        right: 16px;
+        height: 200px;
         display: flex;
         align-items: flex-end;
-        gap: 8px;
+        gap: 10px;
     }
 
     .chart-bar-group {
@@ -179,15 +206,16 @@
 
     .chart-bar {
         width: 100%;
-        max-width: 32px;
+        max-width: 28px;
         border-radius: 4px 4px 0 0;
-        background: linear-gradient(180deg, var(--accent-cyan), rgba(0, 212, 255, 0.3));
+        background: linear-gradient(180deg, var(--accent-cyan), rgba(0, 229, 255, 0.2));
         transition: all var(--transition-base);
         position: relative;
+        box-shadow: 0 0 10px var(--accent-cyan-glow);
     }
 
     .chart-bar:hover {
-        filter: brightness(1.2);
+        filter: brightness(1.15);
         transform: scaleY(1.02);
         transform-origin: bottom;
     }
@@ -195,12 +223,12 @@
     .chart-bar::after {
         content: attr(data-value);
         position: absolute;
-        top: -24px;
+        top: -20px;
         left: 50%;
         transform: translateX(-50%);
         font-family: 'JetBrains Mono', monospace;
-        font-size: 0.6875rem;
-        color: var(--text-muted);
+        font-size: 0.625rem;
+        color: var(--text-secondary);
         opacity: 0;
         transition: opacity var(--transition-fast);
     }
@@ -208,17 +236,20 @@
     .chart-bar:hover::after { opacity: 1; }
 
     .chart-label {
-        font-size: 0.6875rem;
-        color: var(--text-muted);
+        font-size: 0.625rem;
+        color: var(--text-dim);
         text-align: center;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
     }
 
     .chart-legend {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 24px;
-        padding-top: 20px;
+        gap: 20px;
+        padding-top: 16px;
         border-top: 1px solid var(--border-subtle);
     }
 
@@ -226,17 +257,17 @@
         display: flex;
         align-items: center;
         gap: 8px;
-        font-size: 0.8125rem;
-        color: var(--text-secondary);
+        font-size: 0.75rem;
+        color: var(--text-muted);
     }
 
     .legend-dot {
-        width: 10px;
-        height: 10px;
+        width: 8px;
+        height: 8px;
         border-radius: 50%;
     }
 
-    .activity-card { animation-delay: 0.35s; }
+    .activity-card { animation-delay: 0.3s; }
 
     .activity-list {
         display: flex;
@@ -245,8 +276,8 @@
 
     .activity-item {
         display: flex;
-        gap: 16px;
-        padding: 16px 0;
+        gap: 14px;
+        padding: 14px 0;
         border-bottom: 1px solid var(--border-subtle);
         transition: all var(--transition-fast);
     }
@@ -254,16 +285,16 @@
     .activity-item:last-child { border-bottom: none; }
 
     .activity-item:hover {
-        background: var(--bg-elevated);
-        margin: 0 -24px;
-        padding-left: 24px;
-        padding-right: 24px;
+        background: rgba(255, 255, 255, 0.02);
+        margin: 0 -22px;
+        padding-left: 22px;
+        padding-right: 22px;
     }
 
     .activity-icon {
-        width: 40px;
-        height: 40px;
-        border-radius: var(--radius-md);
+        width: 36px;
+        height: 36px;
+        border-radius: var(--radius-sm);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -271,28 +302,28 @@
     }
 
     .activity-icon.match {
-        background: rgba(244, 63, 94, 0.1);
+        background: var(--accent-rose-glow);
         color: var(--accent-rose);
     }
 
     .activity-icon.scan {
-        background: rgba(0, 212, 255, 0.1);
+        background: var(--accent-cyan-glow);
         color: var(--accent-cyan);
     }
 
     .activity-icon.dmca {
-        background: rgba(139, 92, 246, 0.1);
+        background: var(--accent-violet-glow);
         color: var(--accent-violet);
     }
 
     .activity-icon.resolved {
-        background: rgba(16, 185, 129, 0.1);
+        background: var(--accent-emerald-glow);
         color: var(--accent-emerald);
     }
 
     .activity-icon svg {
-        width: 20px;
-        height: 20px;
+        width: 18px;
+        height: 18px;
     }
 
     .activity-content {
@@ -301,49 +332,51 @@
     }
 
     .activity-title {
-        font-size: 0.875rem;
+        font-size: 0.8125rem;
         font-weight: 500;
-        margin-bottom: 4px;
+        margin-bottom: 3px;
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
     }
 
     .activity-title a {
         color: var(--accent-cyan);
         text-decoration: none;
+        transition: color var(--transition-fast);
     }
 
-    .activity-title a:hover { text-decoration: underline; }
+    .activity-title a:hover { color: var(--accent-cyan-muted); }
 
     .activity-meta {
-        font-size: 0.75rem;
-        color: var(--text-muted);
+        font-size: 0.6875rem;
+        color: var(--text-dim);
     }
 
     .activity-time {
-        font-size: 0.75rem;
-        color: var(--text-muted);
+        font-size: 0.6875rem;
+        color: var(--text-dim);
         white-space: nowrap;
+        font-family: 'JetBrains Mono', monospace;
     }
 
     .content-section {
-        margin-top: 32px;
-        animation: slideUp 0.5s ease-out both;
-        animation-delay: 0.4s;
+        margin-top: 28px;
+        animation: slideUp 0.4s ease-out both;
+        animation-delay: 0.35s;
     }
 
     .section-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 20px;
+        margin-bottom: 18px;
     }
 
     .section-title {
-        font-family: 'Instrument Serif', serif;
-        font-size: 1.5rem;
-        font-weight: 400;
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 1.375rem;
+        font-weight: 500;
     }
 
     .content-table {
@@ -351,6 +384,17 @@
         border: 1px solid var(--border-subtle);
         border-radius: var(--radius-lg);
         overflow: hidden;
+        position: relative;
+    }
+
+    .content-table::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
     }
 
     .content-title {
@@ -361,9 +405,9 @@
     }
 
     .content-title-icon {
-        width: 32px;
-        height: 32px;
-        border-radius: var(--radius-sm);
+        width: 30px;
+        height: 30px;
+        border-radius: var(--radius-xs);
         background: var(--accent-cyan-glow);
         display: flex;
         align-items: center;
@@ -372,104 +416,100 @@
     }
 
     .content-title-icon svg {
-        width: 16px;
-        height: 16px;
+        width: 14px;
+        height: 14px;
     }
 
     @media (max-width: 1400px) {
         .main-grid { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 1200px) {
-        .stats-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 768px) {
-        .stats-grid { grid-template-columns: 1fr; }
     }
 </style>
 @endsection
 
 @section('content')
 <div class="page-content">
-    <!-- Stats Grid -->
-    <div class="stats-grid">
-        <div class="stat-card cyan">
-            <div class="stat-header">
-                <div class="stat-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <!-- Stats Grid Row - Using Flexbox -->
+    <div style="display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; gap: 16px; margin-bottom: 24px; width: 100%;">
+        <!-- Protected Posts -->
+        <div style="flex: 1 1 25%; min-width: 0; background: #0C1018; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; position: relative; border-top: 3px solid #00E5FF;">
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px;">
+                <div style="width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: rgba(0,229,255,0.12); color: #00E5FF;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                     </svg>
                 </div>
-                <div class="stat-change up">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                <div style="display: inline-flex; align-items: center; gap: 3px; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 100px; color: #00E676; background: rgba(0,230,118,0.12);">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
                         <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
                     </svg>
                     +12%
                 </div>
             </div>
-            <div class="stat-value" data-target="1247">0</div>
-            <div class="stat-label">Protected Posts</div>
+            <div class="stat-box-value" data-target="1247" style="font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 6px;">0</div>
+            <div style="font-size: 12px; color: #718096; font-weight: 500; text-transform: uppercase; letter-spacing: 0.03em;">Protected Posts</div>
         </div>
 
-        <div class="stat-card emerald">
-            <div class="stat-header">
-                <div class="stat-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <!-- URLs Scanned -->
+        <div style="flex: 1 1 25%; min-width: 0; background: #0C1018; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; position: relative; border-top: 3px solid #00E676;">
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px;">
+                <div style="width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: rgba(0,230,118,0.12); color: #00E676;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
                         <circle cx="11" cy="11" r="8"/>
                         <path d="M21 21l-4.35-4.35"/>
                     </svg>
                 </div>
-                <div class="stat-change up">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                <div style="display: inline-flex; align-items: center; gap: 3px; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 100px; color: #00E676; background: rgba(0,230,118,0.12);">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
                         <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
                     </svg>
                     +8%
                 </div>
             </div>
-            <div class="stat-value" data-target="8934">0</div>
-            <div class="stat-label">URLs Scanned</div>
+            <div class="stat-box-value" data-target="8934" style="font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 6px;">0</div>
+            <div style="font-size: 12px; color: #718096; font-weight: 500; text-transform: uppercase; letter-spacing: 0.03em;">URLs Scanned</div>
         </div>
 
-        <div class="stat-card rose">
-            <div class="stat-header">
-                <div class="stat-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <!-- Matches Found -->
+        <div style="flex: 1 1 25%; min-width: 0; background: #0C1018; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; position: relative; border-top: 3px solid #FF5252;">
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px;">
+                <div style="width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: rgba(255,82,82,0.12); color: #FF5252;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
                         <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
                         <line x1="12" y1="9" x2="12" y2="13"/>
                         <line x1="12" y1="17" x2="12.01" y2="17"/>
                     </svg>
                 </div>
-                <div class="stat-change down">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                <div style="display: inline-flex; align-items: center; gap: 3px; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 100px; color: #FF5252; background: rgba(255,82,82,0.12);">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
                         <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/>
                     </svg>
                     -24%
                 </div>
             </div>
-            <div class="stat-value" data-target="23">0</div>
-            <div class="stat-label">Matches Found</div>
+            <div class="stat-box-value" data-target="23" style="font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 6px;">0</div>
+            <div style="font-size: 12px; color: #718096; font-weight: 500; text-transform: uppercase; letter-spacing: 0.03em;">Matches Found</div>
         </div>
 
-        <div class="stat-card amber">
-            <div class="stat-header">
-                <div class="stat-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <!-- DMCA Success Rate -->
+        <div style="flex: 1 1 25%; min-width: 0; background: #0C1018; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; position: relative; border-top: 3px solid #FFB300;">
+            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px;">
+                <div style="width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: rgba(255,179,0,0.12); color: #FFB300;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
                         <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
                         <polyline points="14 2 14 8 20 8"/>
                         <line x1="16" y1="13" x2="8" y2="13"/>
                         <line x1="16" y1="17" x2="8" y2="17"/>
                     </svg>
                 </div>
-                <div class="stat-change up">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14">
+                <div style="display: inline-flex; align-items: center; gap: 3px; font-size: 11px; font-weight: 700; padding: 4px 8px; border-radius: 100px; color: #00E676; background: rgba(0,230,118,0.12);">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12">
                         <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
                     </svg>
                     +5
                 </div>
             </div>
-            <div class="stat-value" data-target="89" data-suffix="%">0%</div>
-            <div class="stat-label">DMCA Success Rate</div>
+            <div class="stat-box-value" data-target="89" data-suffix="%" style="font-family: 'Space Grotesk', sans-serif; font-size: 2rem; font-weight: 700; color: #fff; margin-bottom: 6px;">0%</div>
+            <div style="font-size: 12px; color: #718096; font-weight: 500; text-transform: uppercase; letter-spacing: 0.03em;">DMCA Success Rate</div>
         </div>
     </div>
 
@@ -798,8 +838,8 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        // Animate stat values
-        document.querySelectorAll('.stat-value').forEach((stat, index) => {
+        // Animate stat box values
+        document.querySelectorAll('.stat-box-value').forEach((stat, index) => {
             const target = parseInt(stat.dataset.target);
             const suffix = stat.dataset.suffix || '';
             setTimeout(() => {
@@ -816,7 +856,7 @@
             }, 500 + index * 100);
         });
 
-        // Tab switching
+        // Tab switching for charts
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', function() {
                 this.parentElement.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));

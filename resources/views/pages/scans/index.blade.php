@@ -5,49 +5,66 @@
 
 @section('styles')
 <style>
-    .page-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 32px;
-    }
-
-    .page-description {
-        color: var(--text-secondary);
-        font-size: 0.9375rem;
-        margin-top: 4px;
-    }
-
     .scan-stats {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-        margin-bottom: 32px;
+        gap: 16px;
+        margin-bottom: 28px;
     }
 
     .scan-stat {
         background: var(--bg-card);
         border: 1px solid var(--border-subtle);
         border-radius: var(--radius-lg);
-        padding: 20px;
-        animation: slideUp 0.5s ease-out both;
+        padding: 18px 20px;
+        animation: slideUp 0.4s ease-out both;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .scan-stat::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--stat-color, var(--accent-cyan));
+        opacity: 0.5;
     }
 
     .scan-stat-value {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 2rem;
-        font-weight: 600;
+        font-size: 1.75rem;
+        font-weight: 700;
         margin-bottom: 4px;
+        letter-spacing: -0.02em;
     }
 
     .scan-stat-label {
-        font-size: 0.8125rem;
-        color: var(--text-muted);
+        font-size: 0.75rem;
+        color: var(--text-dim);
+        font-weight: 500;
     }
 
+    .scan-stat.urls {
+        --stat-color: var(--accent-cyan);
+    }
     .scan-stat.urls .scan-stat-value { color: var(--accent-cyan); }
+
+    .scan-stat.clean {
+        --stat-color: var(--accent-emerald);
+    }
     .scan-stat.clean .scan-stat-value { color: var(--accent-emerald); }
+
+    .scan-stat.matches {
+        --stat-color: var(--accent-rose);
+    }
     .scan-stat.matches .scan-stat-value { color: var(--accent-rose); }
+
+    .scan-stat.pending {
+        --stat-color: var(--accent-amber);
+    }
     .scan-stat.pending .scan-stat-value { color: var(--accent-amber); }
 
     .scans-table {
@@ -55,92 +72,110 @@
         border: 1px solid var(--border-subtle);
         border-radius: var(--radius-lg);
         overflow: hidden;
-        animation: slideUp 0.5s ease-out both;
+        animation: slideUp 0.4s ease-out both;
         animation-delay: 0.1s;
+        position: relative;
+    }
+
+    .scans-table::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
     }
 
     .scans-header {
-        padding: 20px 24px;
+        padding: 18px 22px;
         border-bottom: 1px solid var(--border-subtle);
         display: flex;
         align-items: center;
         justify-content: space-between;
+        background: rgba(255, 255, 255, 0.01);
     }
 
     .scans-title {
-        font-family: 'Instrument Serif', serif;
-        font-size: 1.25rem;
+        font-family: 'Playfair Display', Georgia, serif;
+        font-size: 1.125rem;
+        font-weight: 500;
     }
 
     .scan-type {
         display: inline-flex;
         align-items: center;
-        gap: 6px;
+        gap: 5px;
         padding: 4px 10px;
-        border-radius: var(--radius-sm);
-        font-size: 0.75rem;
-        font-weight: 500;
+        border-radius: 100px;
+        font-size: 0.6875rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
     }
 
     .scan-type.scheduled {
-        background: rgba(139, 92, 246, 0.1);
+        background: var(--accent-violet-glow);
         color: var(--accent-violet);
     }
 
     .scan-type.manual {
-        background: rgba(0, 212, 255, 0.1);
+        background: var(--accent-cyan-glow);
         color: var(--accent-cyan);
     }
 
     .scan-type.auto {
-        background: rgba(16, 185, 129, 0.1);
+        background: var(--accent-emerald-glow);
         color: var(--accent-emerald);
     }
 
     .scan-progress {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
     }
 
     .progress-bar-container {
-        width: 120px;
-        height: 6px;
-        background: var(--bg-elevated);
+        width: 100px;
+        height: 5px;
+        background: rgba(255, 255, 255, 0.06);
         border-radius: 3px;
         overflow: hidden;
     }
 
     .progress-bar-fill {
         height: 100%;
-        background: var(--accent-cyan);
+        background: linear-gradient(90deg, var(--accent-cyan), var(--accent-emerald));
         border-radius: 3px;
         transition: width var(--transition-base);
+        box-shadow: 0 0 8px var(--accent-cyan-glow);
     }
 
     .progress-text {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 0.75rem;
+        font-size: 0.6875rem;
+        font-weight: 600;
         color: var(--text-muted);
-        min-width: 40px;
+        min-width: 36px;
     }
 
     .scan-results-summary {
         display: flex;
         align-items: center;
-        gap: 16px;
+        gap: 14px;
     }
 
     .result-item {
         display: flex;
         align-items: center;
         gap: 6px;
-        font-size: 0.8125rem;
+        font-size: 0.75rem;
+        color: var(--text-secondary);
     }
 
     .result-dot {
-        width: 8px;
-        height: 8px;
+        width: 6px;
+        height: 6px;
         border-radius: 50%;
     }
 
@@ -150,25 +185,28 @@
     .running-indicator {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        padding: 4px 12px;
-        background: rgba(0, 212, 255, 0.1);
+        gap: 6px;
+        padding: 4px 10px;
+        background: var(--accent-cyan-glow);
         border-radius: 100px;
-        font-size: 0.75rem;
+        font-size: 0.6875rem;
+        font-weight: 600;
         color: var(--accent-cyan);
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
     }
 
     .running-dot {
-        width: 8px;
-        height: 8px;
+        width: 6px;
+        height: 6px;
         border-radius: 50%;
         background: var(--accent-cyan);
-        animation: blink 1s infinite;
+        animation: runningPulse 1.5s ease-in-out infinite;
     }
 
-    @keyframes blink {
-        0%, 100% { opacity: 1; }
-        50% { opacity: 0.3; }
+    @keyframes runningPulse {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50% { opacity: 0.4; transform: scale(0.8); }
     }
 
     @media (max-width: 1200px) {

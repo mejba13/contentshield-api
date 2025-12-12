@@ -5,19 +5,6 @@
 
 @section('styles')
 <style>
-    .page-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 32px;
-    }
-
-    .page-description {
-        color: var(--text-secondary);
-        font-size: 0.9375rem;
-        margin-top: 4px;
-    }
-
     .api-info-card {
         background: var(--bg-card);
         border: 1px solid var(--border-subtle);

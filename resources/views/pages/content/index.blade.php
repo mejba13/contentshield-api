@@ -5,24 +5,11 @@
 
 @section('styles')
 <style>
-    .page-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 32px;
-    }
-
-    .page-description {
-        color: var(--text-secondary);
-        font-size: 0.9375rem;
-        margin-top: 4px;
-    }
-
     .filter-bar {
         display: flex;
         align-items: center;
-        gap: 12px;
-        margin-bottom: 24px;
+        gap: 10px;
+        margin-bottom: 20px;
         flex-wrap: wrap;
     }
 
@@ -34,33 +21,48 @@
 
     .filter-select {
         padding: 8px 32px 8px 12px;
-        background: var(--bg-card);
+        background: rgba(255, 255, 255, 0.03);
         border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-md);
+        border-radius: var(--radius-sm);
         color: var(--text-primary);
-        font-size: 0.875rem;
+        font-size: 0.8125rem;
+        font-family: inherit;
         appearance: none;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23718096' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
         background-repeat: no-repeat;
-        background-position: right 8px center;
+        background-position: right 10px center;
         cursor: pointer;
+        transition: all var(--transition-fast);
+    }
+
+    .filter-select:hover {
+        border-color: var(--border-hover);
     }
 
     .filter-select:focus {
         outline: none;
-        border-color: var(--accent-cyan);
+        border-color: var(--accent-cyan-muted);
+        background: rgba(0, 229, 255, 0.04);
+        box-shadow: 0 0 0 3px var(--accent-cyan-glow);
     }
 
     .search-filter {
         flex: 1;
-        min-width: 300px;
+        min-width: 280px;
         display: flex;
         align-items: center;
         gap: 10px;
         padding: 8px 12px;
-        background: var(--bg-card);
+        background: rgba(255, 255, 255, 0.03);
         border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-md);
+        border-radius: var(--radius-sm);
+        transition: all var(--transition-fast);
+    }
+
+    .search-filter:focus-within {
+        border-color: var(--accent-cyan-muted);
+        background: rgba(0, 229, 255, 0.04);
+        box-shadow: 0 0 0 3px var(--accent-cyan-glow);
     }
 
     .search-filter input {
@@ -69,19 +71,24 @@
         border: none;
         outline: none;
         color: var(--text-primary);
-        font-size: 0.875rem;
+        font-size: 0.8125rem;
+        font-family: inherit;
+    }
+
+    .search-filter input::placeholder {
+        color: var(--text-dim);
     }
 
     .search-filter svg {
-        width: 18px;
-        height: 18px;
+        width: 16px;
+        height: 16px;
         color: var(--text-muted);
     }
 
     .content-grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
+        gap: 20px;
     }
 
     .content-card {
@@ -90,12 +97,23 @@
         border-radius: var(--radius-lg);
         overflow: hidden;
         transition: all var(--transition-base);
-        animation: slideUp 0.5s ease-out both;
+        animation: slideUp 0.4s ease-out both;
+        position: relative;
+    }
+
+    .content-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.06), transparent);
     }
 
     .content-card:hover {
         border-color: var(--border-hover);
-        transform: translateY(-4px);
+        transform: translateY(-3px);
         box-shadow: var(--shadow-card);
     }
 

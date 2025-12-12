@@ -5,91 +5,98 @@
 
 @section('styles')
 <style>
-    .page-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 32px;
-    }
-
-    .page-description {
-        color: var(--text-secondary);
-        font-size: 0.9375rem;
-        margin-top: 4px;
-    }
-
     .alert-stats {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 20px;
-        margin-bottom: 32px;
+        gap: 16px;
+        margin-bottom: 28px;
     }
 
     .alert-stat {
         background: var(--bg-card);
         border: 1px solid var(--border-subtle);
         border-radius: var(--radius-lg);
-        padding: 20px;
+        padding: 18px 20px;
         text-align: center;
-        animation: slideUp 0.5s ease-out both;
+        animation: slideUp 0.4s ease-out both;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .alert-stat::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--stat-color, var(--accent-cyan));
+        opacity: 0.5;
     }
 
     .alert-stat-value {
         font-family: 'JetBrains Mono', monospace;
-        font-size: 2rem;
-        font-weight: 600;
+        font-size: 1.75rem;
+        font-weight: 700;
         margin-bottom: 4px;
+        letter-spacing: -0.02em;
     }
 
     .alert-stat-label {
-        font-size: 0.8125rem;
-        color: var(--text-muted);
+        font-size: 0.75rem;
+        color: var(--text-dim);
+        font-weight: 500;
     }
 
+    .alert-stat.critical { --stat-color: var(--accent-rose); }
     .alert-stat.critical .alert-stat-value { color: var(--accent-rose); }
+    .alert-stat.high { --stat-color: var(--accent-amber); }
     .alert-stat.high .alert-stat-value { color: var(--accent-amber); }
+    .alert-stat.medium { --stat-color: var(--accent-cyan); }
     .alert-stat.medium .alert-stat-value { color: var(--accent-cyan); }
+    .alert-stat.resolved { --stat-color: var(--accent-emerald); }
     .alert-stat.resolved .alert-stat-value { color: var(--accent-emerald); }
 
     .filter-tabs {
         display: flex;
         gap: 8px;
-        margin-bottom: 24px;
+        margin-bottom: 20px;
         border-bottom: 1px solid var(--border-subtle);
-        padding-bottom: 16px;
+        padding-bottom: 14px;
     }
 
     .filter-tab {
-        padding: 8px 16px;
+        padding: 7px 14px;
         background: transparent;
         border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-md);
-        color: var(--text-secondary);
-        font-size: 0.875rem;
-        font-weight: 500;
+        border-radius: var(--radius-sm);
+        color: var(--text-muted);
+        font-size: 0.8125rem;
+        font-weight: 600;
         cursor: pointer;
         transition: all var(--transition-fast);
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
     }
 
     .filter-tab:hover {
-        background: var(--bg-card);
-        color: var(--text-primary);
+        background: rgba(255, 255, 255, 0.03);
+        color: var(--text-secondary);
     }
 
     .filter-tab.active {
         background: var(--accent-cyan-glow);
-        border-color: var(--accent-cyan);
+        border-color: var(--accent-cyan-muted);
         color: var(--accent-cyan);
     }
 
     .filter-count {
-        background: var(--bg-elevated);
-        padding: 2px 8px;
+        background: rgba(255, 255, 255, 0.06);
+        padding: 2px 7px;
         border-radius: 100px;
-        font-size: 0.75rem;
+        font-size: 0.6875rem;
+        font-family: 'JetBrains Mono', monospace;
     }
 
     .filter-tab.active .filter-count {
