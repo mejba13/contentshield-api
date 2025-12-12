@@ -1,59 +1,206 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# ContentShield AI
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://img.shields.io/badge/Laravel-12.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" alt="Laravel">
+  <img src="https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white" alt="PHP">
+  <img src="https://img.shields.io/badge/License-Proprietary-blue?style=for-the-badge" alt="License">
 </p>
 
-## About Laravel
+A Laravel SaaS backend for content protection, plagiarism detection, and DMCA automation. This API powers the ContentShield AI WordPress plugin.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **License Management** - Generate, validate, and manage software licenses with activation limits
+- **Content Fingerprinting** - SimHash algorithm for unique content identification
+- **Zero-Width Watermarking** - Invisible watermarks for content tracking
+- **Plagiarism Detection** - AI-powered content matching using OpenAI/Claude
+- **DMCA Automation** - Generate and send takedown notices to Google, hosting providers, and Cloudflare
+- **Scheduled Monitoring** - Automated scanning at configurable intervals
+- **Premium Dashboard** - Modern dark-themed admin interface with interactive animations
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Tech Stack
 
-## Learning Laravel
+- **Framework**: Laravel 12.x
+- **Database**: SQLite (dev) / PostgreSQL (prod)
+- **Queue**: Redis + Laravel Queue
+- **Authentication**: Laravel Sanctum
+- **Payment**: LemonSqueezy integration
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## Requirements
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- PHP 8.2+
+- Composer
+- Node.js 18+ (for frontend assets)
+- Redis (for queues)
 
-## Laravel Sponsors
+## Installation
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```bash
+# Clone the repository
+git clone https://github.com/mejba13/contentshield-api.git
+cd contentshield-api
 
-### Premium Partners
+# Install dependencies
+composer install
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+# Copy environment file
+cp .env.example .env
 
-## Contributing
+# Generate application key
+php artisan key:generate
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+# Run migrations
+php artisan migrate
 
-## Code of Conduct
+# Generate a test license
+php artisan licenses:generate test@example.com --plan=agency
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## Configuration
 
-## Security Vulnerabilities
+Update your `.env` file with the required settings:
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```env
+# LemonSqueezy
+LEMONSQUEEZY_API_KEY=your_api_key
+LEMONSQUEEZY_WEBHOOK_SECRET=your_webhook_secret
+
+# AI Matching (optional)
+OPENAI_API_KEY=your_openai_key
+ANTHROPIC_API_KEY=your_anthropic_key
+
+# Monitoring
+GOOGLE_API_KEY=your_google_api_key
+GOOGLE_CSE_ID=your_custom_search_engine_id
+```
+
+## API Endpoints
+
+### License Management
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/v1/license/validate` | Validate license key |
+| POST | `/api/v1/license/deactivate` | Deactivate license |
+| GET | `/api/v1/license/status` | Get license status |
+
+### Content Protection
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/v1/content/register` | Register content for protection |
+| GET | `/api/v1/content/list` | List protected content |
+| POST | `/api/v1/content/bulk-register` | Bulk register content |
+
+### Monitoring
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/v1/monitoring/scan` | Trigger manual scan |
+| GET | `/api/v1/monitoring/results` | Get scan results |
+| GET | `/api/v1/monitoring/status` | Get monitoring status |
+
+### DMCA
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| POST | `/api/v1/dmca/generate` | Generate DMCA notice |
+| POST | `/api/v1/dmca/send` | Send DMCA notice |
+| GET | `/api/v1/dmca/templates` | Get DMCA templates |
+
+### Reports
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/v1/reports/dashboard` | Dashboard statistics |
+| GET | `/api/v1/reports/trends` | Trend data |
+
+## Admin Dashboard
+
+Access the admin dashboard at `/dashboard` with the following pages:
+
+| Page | Route | Description |
+|------|-------|-------------|
+| Dashboard | `/dashboard` | Overview statistics and recent activity |
+| Protected Content | `/content` | Manage protected content |
+| Plagiarism Alerts | `/alerts` | View and manage detected matches |
+| Scan Results | `/scans` | Monitor scan progress |
+| DMCA Requests | `/dmca` | Track takedown requests |
+| Analytics | `/analytics` | Detailed metrics and charts |
+| Schedule | `/schedule` | Configure automated scans |
+| Settings | `/settings` | Configure preferences |
+| API Keys | `/api-keys` | Manage API authentication |
+
+## Pricing Plans
+
+| Feature | Starter ($9/mo) | Pro ($19/mo) | Agency ($49/mo) |
+|---------|-----------------|--------------|-----------------|
+| Protected Posts | 50 | 200 | Unlimited |
+| Scan Frequency | Weekly | Daily | Hourly |
+| AI Matching | - | Basic | Advanced |
+| DMCA Automation | - | Yes | Yes |
+| Priority Support | - | - | Yes |
+| Activations | 1 site | 3 sites | 10 sites |
+
+## Artisan Commands
+
+```bash
+# License Management
+php artisan licenses:generate {email} --plan={plan}
+php artisan licenses:list --status=active
+php artisan licenses:revoke {id}
+
+# Check Expiring Licenses
+php artisan licenses:check-expiry
+```
+
+## Queue Workers
+
+Start the queue worker for background jobs:
+
+```bash
+php artisan queue:work --queue=scans,dmca,default
+```
+
+## Testing
+
+```bash
+# Run API tests
+php tests/api_test.php
+
+# Run PHPUnit tests
+php artisan test
+```
+
+## Project Structure
+
+```
+contentshield-api/
+├── app/
+│   ├── Console/Commands/     # Artisan commands
+│   ├── Http/
+│   │   ├── Controllers/Api/  # API controllers
+│   │   ├── Middleware/       # License validation
+│   │   └── Requests/         # Form requests
+│   ├── Jobs/                 # Queue jobs
+│   ├── Models/               # Eloquent models
+│   ├── Notifications/        # Email notifications
+│   └── Services/             # Business logic
+├── config/
+│   └── contentshield.php     # Plugin configuration
+├── database/migrations/      # Database schema
+├── resources/views/
+│   ├── layouts/              # Blade layouts
+│   └── pages/                # Dashboard pages
+├── routes/
+│   ├── api.php               # API routes
+│   ├── web.php               # Web routes
+│   └── webhooks.php          # Webhook routes
+└── tests/
+    └── api_test.php          # API test script
+```
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Proprietary - All rights reserved.
+
+## Author
+
+**Engr Mejba Ahmed**
+
+- GitHub: [@mejba13](https://github.com/mejba13)
