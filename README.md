@@ -8,6 +8,9 @@
 
 A Laravel SaaS backend for content protection, plagiarism detection, and DMCA automation. This API powers the ContentShield AI WordPress plugin.
 
+<img width="1969" height="1419" alt="CleanShot 2025-12-12 at 6  10 41" src="https://github.com/user-attachments/assets/442e9cc6-a656-41b4-9cf3-5409dd55ca9a" />
+
+
 ## Features
 
 - **License Management** - Generate, validate, and manage software licenses with activation limits
