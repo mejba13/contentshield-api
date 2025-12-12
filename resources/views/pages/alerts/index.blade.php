@@ -363,22 +363,27 @@
         </button>
     </div>
 
-    <div class="alert-stats">
-        <div class="alert-stat critical" style="animation-delay: 0.1s">
-            <div class="alert-stat-value">3</div>
-            <div class="alert-stat-label">Critical (90%+)</div>
+    <!-- Alert Stats - 4 Column Grid -->
+    <div style="display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; gap: 16px; margin-bottom: 28px; width: 100%;">
+        <!-- Critical -->
+        <div style="flex: 1 1 25%; min-width: 0; background: #0C1018; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; text-align: center; position: relative; border-top: 3px solid #FF5252;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: #FF5252; margin-bottom: 6px;">3</div>
+            <div style="font-size: 0.75rem; color: #718096; font-weight: 500;">Critical (90%+)</div>
         </div>
-        <div class="alert-stat high" style="animation-delay: 0.15s">
-            <div class="alert-stat-value">5</div>
-            <div class="alert-stat-label">High (70-89%)</div>
+        <!-- High -->
+        <div style="flex: 1 1 25%; min-width: 0; background: #0C1018; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; text-align: center; position: relative; border-top: 3px solid #FFB300;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: #FFB300; margin-bottom: 6px;">5</div>
+            <div style="font-size: 0.75rem; color: #718096; font-weight: 500;">High (70-89%)</div>
         </div>
-        <div class="alert-stat medium" style="animation-delay: 0.2s">
-            <div class="alert-stat-value">12</div>
-            <div class="alert-stat-label">Medium (50-69%)</div>
+        <!-- Medium -->
+        <div style="flex: 1 1 25%; min-width: 0; background: #0C1018; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; text-align: center; position: relative; border-top: 3px solid #00E5FF;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: #00E5FF; margin-bottom: 6px;">12</div>
+            <div style="font-size: 0.75rem; color: #718096; font-weight: 500;">Medium (50-69%)</div>
         </div>
-        <div class="alert-stat resolved" style="animation-delay: 0.25s">
-            <div class="alert-stat-value">47</div>
-            <div class="alert-stat-label">Resolved</div>
+        <!-- Resolved -->
+        <div style="flex: 1 1 25%; min-width: 0; background: #0C1018; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; text-align: center; position: relative; border-top: 3px solid #00E676;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: #00E676; margin-bottom: 6px;">47</div>
+            <div style="font-size: 0.75rem; color: #718096; font-weight: 500;">Resolved</div>
         </div>
     </div>
 

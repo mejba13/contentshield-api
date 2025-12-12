@@ -213,65 +213,61 @@
         </button>
     </div>
 
-    <div class="dmca-stats">
-        <div class="dmca-stat" style="animation-delay: 0.1s">
-            <div class="dmca-stat-header">
-                <div class="dmca-stat-icon total">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
-                        <polyline points="14 2 14 8 20 8"/>
-                    </svg>
-                </div>
+    <!-- DMCA Stats - 5 Column Grid -->
+    <div style="display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; gap: 16px; margin-bottom: 28px; width: 100%;">
+        <!-- Total Requests -->
+        <div style="flex: 1 1 20%; min-width: 0; background: #0C1018; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; text-align: center; position: relative; border-top: 3px solid #00E5FF;">
+            <div style="width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: rgba(0,229,255,0.12); color: #00E5FF; margin: 0 auto 12px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                    <polyline points="14 2 14 8 20 8"/>
+                </svg>
             </div>
-            <div class="dmca-stat-value">156</div>
-            <div class="dmca-stat-label">Total Requests</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.75rem; font-weight: 700; color: #fff; margin-bottom: 4px;">156</div>
+            <div style="font-size: 0.75rem; color: #718096; font-weight: 500;">Total Requests</div>
         </div>
-        <div class="dmca-stat" style="animation-delay: 0.15s">
-            <div class="dmca-stat-header">
-                <div class="dmca-stat-icon pending">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12 6 12 12 16 14"/>
-                    </svg>
-                </div>
+        <!-- Pending -->
+        <div style="flex: 1 1 20%; min-width: 0; background: #0C1018; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; text-align: center; position: relative; border-top: 3px solid #FFB300;">
+            <div style="width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: rgba(255,179,0,0.12); color: #FFB300; margin: 0 auto 12px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                </svg>
             </div>
-            <div class="dmca-stat-value">12</div>
-            <div class="dmca-stat-label">Pending</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.75rem; font-weight: 700; color: #FFB300; margin-bottom: 4px;">12</div>
+            <div style="font-size: 0.75rem; color: #718096; font-weight: 500;">Pending</div>
         </div>
-        <div class="dmca-stat" style="animation-delay: 0.2s">
-            <div class="dmca-stat-header">
-                <div class="dmca-stat-icon sent">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="22" y1="2" x2="11" y2="13"/>
-                        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
-                    </svg>
-                </div>
+        <!-- Sent -->
+        <div style="flex: 1 1 20%; min-width: 0; background: #0C1018; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; text-align: center; position: relative; border-top: 3px solid #7C4DFF;">
+            <div style="width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: rgba(124,77,255,0.12); color: #7C4DFF; margin: 0 auto 12px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                    <line x1="22" y1="2" x2="11" y2="13"/>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
             </div>
-            <div class="dmca-stat-value">28</div>
-            <div class="dmca-stat-label">Sent</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.75rem; font-weight: 700; color: #7C4DFF; margin-bottom: 4px;">28</div>
+            <div style="font-size: 0.75rem; color: #718096; font-weight: 500;">Sent</div>
         </div>
-        <div class="dmca-stat" style="animation-delay: 0.25s">
-            <div class="dmca-stat-header">
-                <div class="dmca-stat-icon resolved">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="20 6 9 17 4 12"/>
-                    </svg>
-                </div>
+        <!-- Resolved -->
+        <div style="flex: 1 1 20%; min-width: 0; background: #0C1018; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; text-align: center; position: relative; border-top: 3px solid #00E676;">
+            <div style="width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: rgba(0,230,118,0.12); color: #00E676; margin: 0 auto 12px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                    <polyline points="20 6 9 17 4 12"/>
+                </svg>
             </div>
-            <div class="dmca-stat-value">109</div>
-            <div class="dmca-stat-label">Resolved</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.75rem; font-weight: 700; color: #00E676; margin-bottom: 4px;">109</div>
+            <div style="font-size: 0.75rem; color: #718096; font-weight: 500;">Resolved</div>
         </div>
-        <div class="dmca-stat" style="animation-delay: 0.3s">
-            <div class="dmca-stat-header">
-                <div class="dmca-stat-icon rejected">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="18" y1="6" x2="6" y2="18"/>
-                        <line x1="6" y1="6" x2="18" y2="18"/>
-                    </svg>
-                </div>
+        <!-- Rejected -->
+        <div style="flex: 1 1 20%; min-width: 0; background: #0C1018; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; text-align: center; position: relative; border-top: 3px solid #FF5252;">
+            <div style="width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: rgba(255,82,82,0.12); color: #FF5252; margin: 0 auto 12px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
             </div>
-            <div class="dmca-stat-value">7</div>
-            <div class="dmca-stat-label">Rejected</div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 1.75rem; font-weight: 700; color: #FF5252; margin-bottom: 4px;">7</div>
+            <div style="font-size: 0.75rem; color: #718096; font-weight: 500;">Rejected</div>
         </div>
     </div>
 

@@ -238,22 +238,27 @@
         </button>
     </div>
 
-    <div class="scan-stats">
-        <div class="scan-stat urls" style="animation-delay: 0.1s">
-            <div class="scan-stat-value">24,847</div>
-            <div class="scan-stat-label">Total URLs Scanned</div>
+    <!-- Scan Stats - 4 Column Grid -->
+    <div style="display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; gap: 16px; margin-bottom: 28px; width: 100%;">
+        <!-- Total URLs Scanned -->
+        <div style="flex: 1 1 25%; min-width: 0; background: #0C1018; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; text-align: center; position: relative; border-top: 3px solid #00E5FF;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: #00E5FF; margin-bottom: 6px;">24,847</div>
+            <div style="font-size: 0.75rem; color: #718096; font-weight: 500;">Total URLs Scanned</div>
         </div>
-        <div class="scan-stat clean" style="animation-delay: 0.15s">
-            <div class="scan-stat-value">24,691</div>
-            <div class="scan-stat-label">Clean Results</div>
+        <!-- Clean Results -->
+        <div style="flex: 1 1 25%; min-width: 0; background: #0C1018; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; text-align: center; position: relative; border-top: 3px solid #00E676;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: #00E676; margin-bottom: 6px;">24,691</div>
+            <div style="font-size: 0.75rem; color: #718096; font-weight: 500;">Clean Results</div>
         </div>
-        <div class="scan-stat matches" style="animation-delay: 0.2s">
-            <div class="scan-stat-value">156</div>
-            <div class="scan-stat-label">Matches Found</div>
+        <!-- Matches Found -->
+        <div style="flex: 1 1 25%; min-width: 0; background: #0C1018; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; text-align: center; position: relative; border-top: 3px solid #FF5252;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: #FF5252; margin-bottom: 6px;">156</div>
+            <div style="font-size: 0.75rem; color: #718096; font-weight: 500;">Matches Found</div>
         </div>
-        <div class="scan-stat pending" style="animation-delay: 0.25s">
-            <div class="scan-stat-value">3</div>
-            <div class="scan-stat-label">Scans In Progress</div>
+        <!-- Scans In Progress -->
+        <div style="flex: 1 1 25%; min-width: 0; background: #0C1018; border: 1px solid rgba(255,255,255,0.06); border-radius: 16px; padding: 20px; text-align: center; position: relative; border-top: 3px solid #FFB300;">
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 2rem; font-weight: 700; color: #FFB300; margin-bottom: 6px;">3</div>
+            <div style="font-size: 0.75rem; color: #718096; font-weight: 500;">Scans In Progress</div>
         </div>
     </div>
 
